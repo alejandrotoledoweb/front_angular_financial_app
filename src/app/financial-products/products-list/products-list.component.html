@@ -1,0 +1,60 @@
+<section class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Logo</th>
+        <th>Nombre del Producto</th>
+        <th>
+          Description
+          <span class="tooltip-container">
+            <span class="tooltip-circle">i</span>
+            <span class="tooltip-text">This is the product description</span>
+          </span>
+        </th>
+        <th>
+          Date Release
+          <span class="tooltip-container">
+            <span class="tooltip-circle">i</span>
+            <span class="tooltip-text">This is the release date</span>
+          </span>
+        </th>
+        <th>
+          Date Revision
+          <span class="tooltip-container">
+            <span class="tooltip-circle">i</span>
+            <span class="tooltip-text">This is the revision date</span>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>
+          <img [src]="product.logo" alt="Logo" class="logo" />
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
+        <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="second-section">
+  <p class="results-counter">{{ numberOfResults }} Resultados</p>
+
+  <aside class="select-input">
+    <!-- <label for="limitSelect">Show: </label> -->
+    <select
+      title="select no of items"
+      name="select for number of items"
+      id="limitSelect"
+      (change)="onLimitChange($event)"
+    >
+      <option value="5" [selected]="selectedLimit === 5">5</option>
+      <option value="10" [selected]="selectedLimit === 10">10</option>
+      <option value="15" [selected]="selectedLimit === 15">15</option>
+    </select>
+  </aside>
+</section>

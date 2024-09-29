@@ -1,0 +1,116 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin: 50px 50px
+}
+
+thead tr {
+  background-color: #f4f6f9
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+th {
+  background-color: #e5e5e5;
+}
+
+/* tr:nth-child(even) { */
+  /* background-color: #f9f9f9; */
+/* } */
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Tooltip circle */
+.tooltip-circle {
+  width: 20px;
+  height: 20px;
+  background-color: #555;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 20px;
+  margin-left: 5px;
+  position: relative;
+}
+
+/* Tooltip text (hidden by default) */
+.tooltip-text {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position the tooltip above the circle */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.results-counter {
+  margin-left: 3rem;
+  margin-top: 3rem;
+}
+
+.select-input {
+  margin-right: 3rem;
+  margin-top: 3rem;
+
+}
+
+#limitSelect {
+  height: 30px;
+  width: 60px;
+  padding-left:10px;
+  border-radius: 10px;
+}
+
+.second-section{
+  display: flex;
+  justify-content:space-between
+}
