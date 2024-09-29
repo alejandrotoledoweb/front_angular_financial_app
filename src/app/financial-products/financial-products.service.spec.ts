@@ -3,7 +3,10 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { FinancialProductsService } from './financial-products.service';
+import {
+  FinancialProduct,
+  FinancialProductsService,
+} from './financial-products.service';
 
 describe('FinancialProductsService', () => {
   let service: FinancialProductsService;
@@ -55,5 +58,56 @@ describe('FinancialProductsService', () => {
     const req = httpMock.expectOne('http://localhost:3002/bp/products?limit=2');
     expect(req.request.method).toBe('GET');
     req.flush(mockProducts); // Mock the HTTP response
+  });
+
+  it('should send a POST request to add a product', () => {
+    const newProduct: FinancialProduct = {
+      id: 'prod123',
+      name: 'Producto Nuevo',
+      description: 'Descripción del nuevo producto',
+      logo: 'assets/logo.png',
+      date_release: new Date('2025-01-01'),
+      date_revision: new Date('2026-01-01'),
+    };
+
+    service.addProduct(newProduct).subscribe((response) => {
+      expect(response).toEqual(newProduct);
+    });
+
+    const req = httpMock.expectOne('http://localhost:3002/bp/products');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(newProduct);
+
+    req.flush(newProduct); // Simula la respuesta del servidor
+  });
+
+  it('should handle an error when adding a product fails', () => {
+    const newProduct: FinancialProduct = {
+      id: 'prod123',
+      name: 'Producto Erroneo',
+      description: 'Descripción del producto',
+      logo: 'assets/logo.png',
+      date_release: new Date('2025-01-01'),
+      date_revision: new Date('2026-01-01'),
+    };
+
+    service.addProduct(newProduct).subscribe(
+      () => fail('Debería fallar'),
+      (error) => {
+        expect(error.status).toBe(400);
+        expect(error.error.message).toBe(
+          "Invalid body, check 'errors' property for more info."
+        );
+      }
+    );
+
+    const req = httpMock.expectOne('http://localhost:3002/bp/products');
+    expect(req.request.method).toBe('POST');
+
+    // Simula una respuesta de error del servidor
+    req.flush(
+      { message: "Invalid body, check 'errors' property for more info." },
+      { status: 400, statusText: 'Bad Request' }
+    );
   });
 });

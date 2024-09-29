@@ -23,4 +23,8 @@ export class FinancialProductsService {
     const params = new HttpParams().set('limit', limit.toString());
     return this.http.get<FinancialProduct[]>(this.apiUrl, { params });
   }
+
+  addProduct(product: FinancialProduct): Observable<FinancialProduct> {
+    return this.http.post<FinancialProduct>(this.apiUrl, product);
+  }
 }
