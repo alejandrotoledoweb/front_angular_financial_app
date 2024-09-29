@@ -5,7 +5,7 @@ import { FinancialProductsService } from '../financial-products.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss'],
+  styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;

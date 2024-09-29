@@ -1,10 +1,27 @@
 <section class="table-container">
+  <input
+    type="text"
+    placeholder="Buscar producto..."
+    [(ngModel)]="searchTerm"
+    (input)="filterProducts()"
+    class="search-input"
+  />
   <div class="header-actions">
     <button class="add-product-btn" [routerLink]="['/add-product']">
       Agregar Producto
     </button>
   </div>
-  <table>
+
+  <!-- Indicador de carga -->
+  <div *ngIf="isLoading" class="loading-indicator">Loading products...</div>
+
+  <!-- Manejo de errores -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Tabla de productos -->
+  <table *ngIf="!isLoading && !errorMessage && products.length > 0">
     <thead>
       <tr>
         <th>Logo</th>
@@ -33,7 +50,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of filteredProducts">
         <td>
           <img [src]="product.logo" alt="Logo" class="logo" />
         </td>
@@ -46,11 +63,14 @@
   </table>
 </section>
 
-<section class="second-section">
-  <p class="results-counter">{{ numberOfResults }} Resultados</p>
+<!-- Segunda sección para el contador de resultados y el selector -->
+<section
+  class="second-section"
+  *ngIf="!isLoading && !errorMessage && products.length > 0"
+>
+  <p class="results-counter">{{ getTotalProducts() }} Resultados</p>
 
   <aside class="select-input">
-    <!-- <label for="limitSelect">Show: </label> -->
     <select
       title="select no of items"
       name="select for number of items"
