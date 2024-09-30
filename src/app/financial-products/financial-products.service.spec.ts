@@ -15,7 +15,7 @@ describe('FinancialProductsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [FinancialProductsService], // Ensure the service is injected
+      providers: [FinancialProductsService],
     });
 
     service = TestBed.inject(FinancialProductsService);
@@ -23,7 +23,7 @@ describe('FinancialProductsService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Ensure there are no outstanding requests after each test
+    httpMock.verify();
   });
 
   it('should be created', () => {
@@ -57,7 +57,7 @@ describe('FinancialProductsService', () => {
 
     const req = httpMock.expectOne('http://localhost:3002/bp/products?limit=2');
     expect(req.request.method).toBe('GET');
-    req.flush(mockProducts); // Mock the HTTP response
+    req.flush(mockProducts);
   });
 
   it('should send a POST request to add a product', () => {
@@ -104,7 +104,6 @@ describe('FinancialProductsService', () => {
     const req = httpMock.expectOne('http://localhost:3002/bp/products');
     expect(req.request.method).toBe('POST');
 
-    // Simula una respuesta de error del servidor
     req.flush(
       { message: "Invalid body, check 'errors' property for more info." },
       { status: 400, statusText: 'Bad Request' }

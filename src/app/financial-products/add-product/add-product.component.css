@@ -1,37 +1,85 @@
-
-
-
-
-.form-group {
-  margin-bottom: 15px;
+/* Form base styles */
+.form {
+  margin: 50px 250px;
+  background-color: #f5f4f4;
 }
 
-.form-control {
-  width: 100%;
-  padding: 10px;
+.form__title {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.form__section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 30px;
+}
+
+.form__label {
+  margin: 20px 0;
+}
+
+.form__input,
+.form__textarea {
+  height: 30px;
+  width: 250px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.error-message {
-  color: red;
-  font-size: 0.875rem;
+.form__textarea {
+  height: auto;
 }
 
-.form-control.ng-invalid.ng-touched {
-  border-color: red;
+.form__inputs {
+  display: flex;
+  justify-content: center;
 }
 
-button {
+.form__group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.form__actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  column-gap: 100px;
+}
+
+.form__button {
   padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
+  background-color: #f5df66;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:disabled {
+.form__button__reset {
+  padding: 10px 20px;
+  background-color: #e5e5e5;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form__button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+/* Error message styles */
+.form__error {
+  color: red;
+  text-align: left;
+}
+
+.form__input.ng-invalid.ng-touched {
+  border-color: red;
 }

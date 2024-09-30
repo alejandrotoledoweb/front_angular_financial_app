@@ -1,48 +1,78 @@
+/* Table container styles */
 .table-container {
-  width: 100%;
   overflow-x: auto;
+  margin: 50px;
+  background-color: #fff;
+  padding: 20px 50px 10px 50px;
 }
 
-table {
+.table-container__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.table-container__search-input {
+  height: 2rem;
+  width: 10rem;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+.table-container__add-btn {
+  background-color: #f5df66;
+  border-radius: 5px;
+  border: none;
+  padding: 0 30px;
+  cursor: pointer;
+}
+
+.table-container__loading {
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+}
+
+.table-container__error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+}
+
+.table-container__table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: auto;
-  margin: 50px 50px
 }
 
-thead tr {
-  background-color: #f4f6f9
+.table-container__thead-row {
+  background-color: #cecece;
 }
 
-th, td {
+.table-container__th, .table-container__td {
   padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid #868585;
 }
 
-th {
-  background-color: #e5e5e5;
+.table-container__th {
+  background-color: #c8c5c5;
 }
 
-/* tr:nth-child(even) { */
-  /* background-color: #f9f9f9; */
-/* } */
-
-.logo {
+.table-container__logo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.tooltip-container {
+.table-container__tooltip {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
 
-/* Tooltip circle */
-.tooltip-circle {
+.table-container__tooltip-circle {
   width: 20px;
   height: 20px;
   background-color: #555;
@@ -56,8 +86,7 @@ th {
   position: relative;
 }
 
-/* Tooltip text (hidden by default) */
-.tooltip-text {
+.table-container__tooltip-text {
   visibility: hidden;
   width: 160px;
   background-color: #555;
@@ -67,18 +96,17 @@ th {
   padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 125%; /* Position the tooltip above the circle */
+  bottom: 125%;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-/* Tooltip arrow */
-.tooltip-text::after {
+.table-container__tooltip-text::after {
   content: '';
   position: absolute;
-  top: 100%; /* Bottom of the tooltip */
+  top: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
@@ -86,31 +114,34 @@ th {
   border-color: #555 transparent transparent transparent;
 }
 
-/* Show tooltip on hover */
-.tooltip-container:hover .tooltip-text {
+.table-container__tooltip:hover .table-container__tooltip-text {
   visibility: visible;
   opacity: 1;
 }
 
-.results-counter {
-  margin-left: 3rem;
+/* Results section styles */
+.results-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.results-section__counter {
+  margin-left: 50px;
   margin-top: 3rem;
 }
 
-.select-input {
+.results-section__select {
   margin-right: 3rem;
   margin-top: 3rem;
-
 }
 
-#limitSelect {
+.results-section__select-input {
   height: 30px;
   width: 60px;
-  padding-left:10px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 10px;
-}
-
-.second-section{
-  display: flex;
-  justify-content:space-between
+  cursor: pointer;
 }

@@ -1,81 +1,93 @@
 <section class="table-container">
-  <input
-    type="text"
-    placeholder="Buscar producto..."
-    [(ngModel)]="searchTerm"
-    (input)="filterProducts()"
-    class="search-input"
-  />
-  <div class="header-actions">
-    <button class="add-product-btn" [routerLink]="['/add-product']">
-      Agregar Producto
+  <section class="table-container__header">
+    <input
+      type="text"
+      placeholder="Buscar producto..."
+      [(ngModel)]="searchTerm"
+      (input)="filterProducts()"
+      class="table-container__search-input"
+    />
+    <button class="table-container__add-btn" [routerLink]="['/add-product']">
+      Agregar
     </button>
+  </section>
+
+  <div *ngIf="isLoading" class="table-container__loading">
+    Loading products...
   </div>
 
-  <!-- Indicador de carga -->
-  <div *ngIf="isLoading" class="loading-indicator">Loading products...</div>
-
-  <!-- Manejo de errores -->
-  <div *ngIf="errorMessage" class="error-message">
+  <div *ngIf="errorMessage" class="table-container__error">
     {{ errorMessage }}
   </div>
 
-  <!-- Tabla de productos -->
-  <table *ngIf="!isLoading && !errorMessage && products.length > 0">
-    <thead>
-      <tr>
-        <th>Logo</th>
-        <th>Nombre del Producto</th>
-        <th>
+  <table
+    *ngIf="!isLoading && !errorMessage && products.length > 0"
+    class="table-container__table"
+  >
+    <thead class="table-container__thead">
+      <tr class="table-container__thead-row">
+        <th class="table-container__th">Logo</th>
+        <th class="table-container__th">Nombre del Producto</th>
+        <th class="table-container__th">
           Description
-          <span class="tooltip-container">
-            <span class="tooltip-circle">i</span>
-            <span class="tooltip-text">This is the product description</span>
+          <span class="table-container__tooltip">
+            <span class="table-container__tooltip-circle">i</span>
+            <span class="table-container__tooltip-text"
+              >This is the product description</span
+            >
           </span>
         </th>
-        <th>
+        <th class="table-container__th">
           Date Release
-          <span class="tooltip-container">
-            <span class="tooltip-circle">i</span>
-            <span class="tooltip-text">This is the release date</span>
+          <span class="table-container__tooltip">
+            <span class="table-container__tooltip-circle">i</span>
+            <span class="table-container__tooltip-text"
+              >This is the release date</span
+            >
           </span>
         </th>
-        <th>
+        <th class="table-container__th">
           Date Revision
-          <span class="tooltip-container">
-            <span class="tooltip-circle">i</span>
-            <span class="tooltip-text">This is the revision date</span>
+          <span class="table-container__tooltip">
+            <span class="table-container__tooltip-circle">i</span>
+            <span class="table-container__tooltip-text"
+              >This is the revision date</span
+            >
           </span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of filteredProducts">
-        <td>
-          <img [src]="product.logo" alt="Logo" class="logo" />
+      <tr *ngFor="let product of filteredProducts" class="table-container__row">
+        <td class="table-container__td">
+          <img [src]="product.logo" alt="Logo" class="table-container__logo" />
         </td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.date_release | date : "dd/MM/yyyy" }}</td>
-        <td>{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+        <td class="table-container__td">{{ product.name }}</td>
+        <td class="table-container__td">{{ product.description }}</td>
+        <td class="table-container__td">
+          {{ product.date_release | date : "dd/MM/yyyy" }}
+        </td>
+        <td class="table-container__td">
+          {{ product.date_revision | date : "dd/MM/yyyy" }}
+        </td>
       </tr>
     </tbody>
   </table>
 </section>
 
-<!-- Segunda sección para el contador de resultados y el selector -->
 <section
-  class="second-section"
+  class="results-section"
   *ngIf="!isLoading && !errorMessage && products.length > 0"
 >
-  <p class="results-counter">{{ getTotalProducts() }} Resultados</p>
+  <p class="results-section__counter">{{ getTotalProducts() }} Resultados</p>
 
-  <aside class="select-input">
+  <aside class="results-section__select">
     <select
       title="select no of items"
       name="select for number of items"
       id="limitSelect"
       (change)="onLimitChange($event)"
+      class="results-section__select-input"
     >
       <option value="5" [selected]="selectedLimit === 5">5</option>
       <option value="10" [selected]="selectedLimit === 10">10</option>

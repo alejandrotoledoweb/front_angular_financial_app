@@ -15,38 +15,53 @@ export class AddProductComponent implements OnInit {
     private productService: FinancialProductsService
   ) {
     this.productForm = this.fb.group({
-      id: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      id: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10),
+        ],
+      ],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(100),
+        ],
+      ],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(200),
+        ],
+      ],
       logo: ['', Validators.required],
       date_release: ['', Validators.required],
-      date_revision: [{ value: '', disabled: true }], // Campo de solo lectura
+      date_revision: [{ value: '', disabled: true }],
     });
   }
 
   ngOnInit(): void {
-    // Observa los cambios en el campo de 'date_release' y actualiza 'date_revision'
     this.productForm
       .get('date_release')
       ?.valueChanges.subscribe((releaseDate) => {
         const revisionDate = this.calculateRevisionDate(releaseDate);
 
+        this.productForm.get('date_revision')?.disable();
         if (releaseDate) {
-          // Si hay una fecha de liberación, habilita el campo de revisión y actualiza su valor
-          this.productForm.get('date_revision')?.enable();
           this.productForm.patchValue({ date_revision: revisionDate });
-        } else {
-          // Si no hay fecha de liberación, deshabilita el campo de revisión
-          this.productForm.get('date_revision')?.disable();
         }
       });
   }
-  // Método para calcular la fecha de revisión
   calculateRevisionDate(releaseDate: string): string {
     if (releaseDate) {
       const date = new Date(releaseDate);
-      date.setFullYear(date.getFullYear() + 1); // Agrega un año
-      return date.toISOString().split('T')[0]; // Retorna en formato YYYY-MM-DD
+      date.setFullYear(date.getFullYear() + 1);
+      return date.toISOString().split('T')[0];
     }
     return '';
   }
@@ -65,5 +80,16 @@ export class AddProductComponent implements OnInit {
     } else {
       console.log('Formulario inválido');
     }
+  }
+
+  resetForm(): void {
+    this.productForm.reset({
+      id: '',
+      name: '',
+      description: '',
+      logo: '',
+      date_release: '',
+      date_revision: '',
+    });
   }
 }

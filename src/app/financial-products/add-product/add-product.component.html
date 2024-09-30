@@ -1,92 +1,137 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="id">ID</label>
-    <input id="id" formControlName="id" type="text" />
-    <div
-      *ngIf="productForm.get('id')?.invalid && productForm.get('id')?.touched"
-    >
-      <small *ngIf="productForm.get('id')?.errors?.[ 'required']"
-        >El ID es obligatorio</small
-      >
-      <small *ngIf="productForm.get('id')?.errors?.['minlength']"
-        >El ID debe tener al menos 3 caracteres</small
-      >
-      <small *ngIf="productForm.get('id')?.errors?.['maxlength']"
-        >El ID debe tener un máximo de 10 caracteres</small
-      >
-    </div>
-  </div>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form">
+  <h2 class="form__title">Formulario de Registro</h2>
+  <hr />
+  <main class="form__inputs">
+    <section class="form__section">
+      <div class="form__group">
+        <label for="id" class="form__label">ID</label>
+        <input id="id" formControlName="id" type="text" class="form__input" />
+        <div
+          class="form__error"
+          *ngIf="
+            productForm.get('id')?.invalid && productForm.get('id')?.touched
+          "
+        >
+          <small *ngIf="productForm.get('id')?.errors?.['required']"
+            >El ID es obligatorio</small
+          >
+          <small *ngIf="productForm.get('id')?.errors?.['minlength']"
+            >El ID debe tener al menos 3 caracteres</small
+          >
+          <small *ngIf="productForm.get('id')?.errors?.['maxlength']"
+            >El ID debe tener un máximo de 10 caracteres</small
+          >
+        </div>
+      </div>
 
-  <div>
-    <label for="name">Nombre</label>
-    <input id="name" formControlName="name" type="text" />
-    <div
-      *ngIf="
-        productForm.get('name')?.invalid && productForm.get('name')?.touched
-      "
-    >
-      <small *ngIf="productForm.get('name')?.errors?.['required']"
-        >El nombre es obligatorio</small
-      >
-      <small *ngIf="productForm.get('name')?.errors?.['minlength']"
-        >El nombre debe tener al menos 5 caracteres</small
-      >
-    </div>
-  </div>
+      <div class="form__group">
+        <label for="description" class="form__label">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form__textarea"
+        ></textarea>
+        <div
+          class="form__error"
+          *ngIf="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+        >
+          <small *ngIf="productForm.get('description')?.errors?.['required']"
+            >La descripción es obligatoria</small
+          >
+          <small *ngIf="productForm.get('description')?.errors?.['minlength']"
+            >La descripción debe tener al menos 10 caracteres</small
+          >
+        </div>
+      </div>
 
-  <div>
-    <label for="description">Descripción</label>
-    <textarea id="description" formControlName="description"></textarea>
-    <div
-      *ngIf="
-        productForm.get('description')?.invalid &&
-        productForm.get('description')?.touched
-      "
-    >
-      <small *ngIf="productForm.get('description')?.errors?.['required']"
-        >La descripción es obligatoria</small
-      >
-      <small *ngIf="productForm.get('description')?.errors?.['minlength']"
-        >La descripción debe tener al menos 10 caracteres</small
-      >
-    </div>
-  </div>
+      <div class="form__group">
+        <label for="date_release" class="form__label"
+          >Fecha de Liberación</label
+        >
+        <input
+          id="date_release"
+          formControlName="date_release"
+          type="date"
+          class="form__input"
+        />
+        <div
+          class="form__error"
+          *ngIf="
+            productForm.get('date_release')?.invalid &&
+            productForm.get('date_release')?.touched
+          "
+        >
+          <small *ngIf="productForm.get('date_release')?.errors?.['required']"
+            >La fecha de liberación es obligatoria</small
+          >
+        </div>
+      </div>
+    </section>
 
-  <div>
-    <label for="logo">Logo</label>
-    <input id="logo" formControlName="logo" type="text" />
-    <div
-      *ngIf="
-        productForm.get('logo')?.invalid && productForm.get('logo')?.touched
-      "
-    >
-      <small *ngIf="productForm.get('logo')?.errors?.['required']"
-        >El logo es obligatorio</small
-      >
-    </div>
-  </div>
+    <section class="form__section">
+      <div class="form__group">
+        <label for="name" class="form__label">Nombre</label>
+        <input
+          id="name"
+          formControlName="name"
+          type="text"
+          class="form__input"
+        />
+        <div
+          class="form__error"
+          *ngIf="
+            productForm.get('name')?.invalid && productForm.get('name')?.touched
+          "
+        >
+          <small *ngIf="productForm.get('name')?.errors?.['required']"
+            >El nombre es obligatorio</small
+          >
+          <small *ngIf="productForm.get('name')?.errors?.['minlength']"
+            >El nombre debe tener al menos 5 caracteres</small
+          >
+        </div>
+      </div>
 
-  <div>
-    <label for="date_release">Fecha de Liberación</label>
-    <input id="date_release" formControlName="date_release" type="date" />
-    <div
-      *ngIf="
-        productForm.get('date_release')?.invalid &&
-        productForm.get('date_release')?.touched
-      "
-    >
-      <small *ngIf="productForm.get('date_release')?.errors?.['required']"
-        >La fecha de liberación es obligatoria</small
-      >
-    </div>
-  </div>
+      <div class="form__group">
+        <label for="logo" class="form__label">Logo</label>
+        <input
+          id="logo"
+          formControlName="logo"
+          type="text"
+          class="form__input"
+        />
+        <div
+          class="form__error"
+          *ngIf="
+            productForm.get('logo')?.invalid && productForm.get('logo')?.touched
+          "
+        >
+          <small *ngIf="productForm.get('logo')?.errors?.['required']"
+            >El logo es obligatorio</small
+          >
+        </div>
+      </div>
 
-  <div>
-    <label for="date_revision">Fecha de Revisión</label>
-    <input id="date_revision" formControlName="date_revision" type="date" />
-  </div>
-
-  <button type="submit" [disabled]="productForm.invalid">
-    Agregar Producto
-  </button>
+      <div class="form__group">
+        <label for="date_revision" class="form__label">Fecha de Revisión</label>
+        <input
+          id="date_revision"
+          formControlName="date_revision"
+          type="date"
+          class="form__input"
+        />
+      </div>
+    </section>
+  </main>
+  <section class="form__actions">
+    <button type="button" class="form__button__reset" (click)="resetForm()">
+      Reset
+    </button>
+    <button type="submit" class="form__button" [disabled]="productForm.invalid">
+      Agregar Producto
+    </button>
+  </section>
 </form>

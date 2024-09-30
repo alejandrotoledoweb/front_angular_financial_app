@@ -6,12 +6,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule], // Import necessary modules
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [AppComponent],
     })
       .overrideComponent(AppComponent, {
         set: {
-          template: '<div>App Component</div>', // Inline template for testing
+          template: '<div>App Component</div>',
         },
       })
       .compileComponents();

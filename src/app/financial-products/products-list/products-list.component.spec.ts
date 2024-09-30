@@ -3,7 +3,6 @@ import { ProductsListComponent } from './products-list.component';
 import { FinancialProductsService } from '../financial-products.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
-import { By } from '@angular/platform-browser';
 
 describe('ProductsListComponent with search', () => {
   let component: ProductsListComponent;
@@ -48,7 +47,7 @@ describe('ProductsListComponent with search', () => {
   it('should fetch and display the list of products', () => {
     jest.spyOn(productService, 'getProducts').mockReturnValue(of(mockProducts));
 
-    component.ngOnInit(); // Manually call ngOnInit to trigger data fetching
+    component.ngOnInit();
     fixture.detectChanges();
 
     expect(component.products.length).toBe(2);
@@ -61,12 +60,10 @@ describe('ProductsListComponent with search', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    // Set the search term
     component.searchTerm = 'Product 1';
     component.filterProducts();
     fixture.detectChanges();
 
-    // Expect the filtered products list to contain only 'Product 1'
     expect(component.filteredProducts.length).toBe(1);
     expect(component.filteredProducts[0].name).toBe('Product 1');
   });
@@ -77,12 +74,10 @@ describe('ProductsListComponent with search', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    // Set the search term with different casing
     component.searchTerm = 'product 2';
     component.filterProducts();
     fixture.detectChanges();
 
-    // Expect the filtered products list to contain 'Product 2'
     expect(component.filteredProducts.length).toBe(1);
     expect(component.filteredProducts[0].name).toBe('Product 2');
   });
@@ -93,12 +88,10 @@ describe('ProductsListComponent with search', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    // Set the search term to an empty string
     component.searchTerm = '';
     component.filterProducts();
     fixture.detectChanges();
 
-    // Expect all products to be shown
     expect(component.filteredProducts.length).toBe(2);
   });
 
@@ -108,12 +101,10 @@ describe('ProductsListComponent with search', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    // Set the search term to a non-matching value
     component.searchTerm = 'Non-existing product';
     component.filterProducts();
     fixture.detectChanges();
 
-    // Expect no products to be shown
     expect(component.filteredProducts.length).toBe(0);
   });
 });
